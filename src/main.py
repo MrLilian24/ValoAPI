@@ -1,11 +1,18 @@
 # Valorant API
 from riotwatcher import RiotWatcher, ValWatcher, LolWatcher, ApiError
 
-api_key = ""
+YOUR_API_KEY = ""
 
-riot = RiotWatcher(api_key) # Riot API
-lol = LolWatcher(api_key) # League of Legends API
-val = ValWatcher(api_key) # Valorant API
+riot = RiotWatcher(YOUR_API_KEY) # Riot API
+lol = LolWatcher(YOUR_API_KEY) # League of Legends API
+val = ValWatcher(YOUR_API_KEY) # Valorant API
+
+def get_player_puuid(name, tag):
+    try:
+        player_puuid = riot.account.by_riot_id("EUROPE", name, tag)["puuid"]
+        return player_puuid
+    except ApiError as e:
+        print("Player cannot be found.\n", e)
 
 try:
     player_puuid = "B0s7DeR8XNKCcDdFW6TpnRdY7cNBiFXpAWbhZaNk53sOkUQboogZxjwHdoCbWeOrnHxn9hH5T-aJlQ"
@@ -14,6 +21,9 @@ try:
     player_name = riot.account.by_puuid("EUROPE", player_puuid)["gameName"]
     print(f"Player name: {player_name}")
 
+
 except ApiError as e:
     print(e)
 
+if __name__ == "__main__":
+    assert get_player_puuid("JaimeLesGlaces", "CCLES") == player_puuid
