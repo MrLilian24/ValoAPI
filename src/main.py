@@ -4,7 +4,6 @@ from riotwatcher import RiotWatcher, ValWatcher, LolWatcher, ApiError
 YOUR_API_KEY = ""
 
 riot = RiotWatcher(YOUR_API_KEY) # Riot API
-lol = LolWatcher(YOUR_API_KEY) # League of Legends API
 val = ValWatcher(YOUR_API_KEY) # Valorant API
 
 def get_player_puuid(name, tag):
